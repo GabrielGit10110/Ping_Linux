@@ -13,10 +13,22 @@ public class PingController extends Thread {
 		this.serverName = serverName;
 	}
 	
+	private String os() { 
+		String osName = System.getProperty("os.name");
+		return osName;
+	}
+	
 	@Override
 	public void run() {
-		pingServer();
-	}
+		if (os().contains("Linux")) {
+			pingServer();
+
+		} else {
+			System.out.println("Sistema operacional invalido: " + os());
+			System.out.println("Aplicacao so pode ser executada em uma distribuicao linux");
+		}
+		
+}
 	
 	private void pingServer() {
 		String[] refactoredMessage = msg.split(" ");
@@ -71,4 +83,3 @@ public class PingController extends Thread {
 		
 	}	
 }
-	
